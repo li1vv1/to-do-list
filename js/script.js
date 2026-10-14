@@ -77,6 +77,16 @@ main.append(taskList);
 
 const tasks = []; 
 
+function renderTasks() {
+    taskList.replaceChildren();
+    tasks.forEach(function (currentTask) {
+        const item = document.createElement("li");
+        item.className = "task";
+        item.textContent = `${currentTask.title} — ${currentTask.date}`;
+        taskList.append(item);
+    });
+}
+
 form.addEventListener("submit", function (event) {
     event.preventDefault();
     const task = {
@@ -86,7 +96,6 @@ form.addEventListener("submit", function (event) {
         done: false
     };
     tasks.push(task);
-    console.log(tasks);
+    renderTasks();
     form.reset();
 });
-
