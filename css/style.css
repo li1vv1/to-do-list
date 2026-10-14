@@ -105,3 +105,16 @@ input, select, button {
 .task-form__input::placeholder, .controls__search::placeholder {
     color: #8a8aa8;
 }
+.task__checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #5240db;
+    cursor: pointer;
+}
+.task--done {
+    background-color: lavender;
+}
+.task--done .task__text {
+    text-decoration: line-through;
+    color: #8a8aa8;
+}
