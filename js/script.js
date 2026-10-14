@@ -75,8 +75,18 @@ const taskList = document.createElement("ul");
 taskList.className = "task-list";
 main.append(taskList);
 
+const tasks = []; 
+
 form.addEventListener("submit", function (event) {
     event.preventDefault();
-    console.log(titleInput.value);
-    console.log(dateInput.value);
+    const task = {
+        id: Date.now(),
+        title: titleInput.value,
+        date: dateInput.value,
+        done: false
+    };
+    tasks.push(task);
+    console.log(tasks);
+    form.reset();
 });
+
