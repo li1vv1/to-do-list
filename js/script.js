@@ -76,12 +76,45 @@ taskList.className = "task-list";
 main.append(taskList);
 
 let tasks = [];
+let editingId = null;
 
 function renderTasks() {
     taskList.replaceChildren();
     tasks.forEach(function (currentTask) {
         const item = document.createElement("li");
         item.className = "task";
+
+        if (currentTask.id === editingId) {
+            const titleEdit = document.createElement("input");
+            titleEdit.type = "text";
+            titleEdit.value = currentTask.title;
+            titleEdit.className = "task__edit-input";
+
+            const dateEdit = document.createElement("input");
+            dateEdit.type = "date";
+            dateEdit.value = currentTask.date;
+            dateEdit.className = "task__edit-date";
+
+            const saveButton = document.createElement("button");
+            saveButton.textContent = "Сохранить";
+            saveButton.type = "button";
+            saveButton.className = "task__button";
+
+            saveButton.addEventListener("click", function () {
+                if (titleEdit.value.trim() === "" || dateEdit.value === "") {
+                    return;
+                }
+                currentTask.title = titleEdit.value;
+                currentTask.date = dateEdit.value;
+                editingId = null;
+                renderTasks();
+            });
+
+            item.append(titleEdit, dateEdit, saveButton);
+            taskList.append(item);
+            return;
+        }
+
         if (currentTask.done) {
             item.classList.add("task--done");
         }
@@ -104,6 +137,16 @@ function renderTasks() {
         date.textContent = currentTask.date;
         date.className = "task__date";
 
+        const editButton = document.createElement("button");
+        editButton.textContent = "Изменить";
+        editButton.type = "button";
+        editButton.className = "task__button";
+
+        editButton.addEventListener("click", function () {
+            editingId = currentTask.id;
+            renderTasks();
+        });
+
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Удалить";
         deleteButton.type = "button";
@@ -116,7 +159,7 @@ function renderTasks() {
             renderTasks();
         });
 
-        item.append(checkbox, text, date, deleteButton);
+        item.append(checkbox, text, date, editButton, deleteButton);
         taskList.append(item);
     });
 }

@@ -118,3 +118,16 @@ input, select, button {
     text-decoration: line-through;
     color: #8a8aa8;
 }
+.task__edit-input {
+    flex: 1 1 150px;
+    padding: 6px 10px;
+    border: 1px solid #9595ca;
+    border-radius: 8px;
+    font-size: 16px;
+}
+.task__edit-date {
+    padding: 6px 10px;
+    border: 1px solid #9595ca;
+    border-radius: 8px;
+    font-size: 16px;
+}
