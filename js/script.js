@@ -28,3 +28,7 @@ addButton.textContent = "Добавить";
 addButton.type = "submit";
 addButton.className = "task-form__button";
 form.append(addButton);
+
+const taskList = document.createElement("ul");
+taskList.className = "task-list";
+main.append(taskList);
