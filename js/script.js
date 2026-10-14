@@ -65,4 +65,20 @@ done.textContent = "Выполненные";
 
 filterSelect.append(all, active, done);
 controls.append(filterSelect);
+
+
+const sortSelect = document.createElement("select");
+sortSelect.className = "controls__sort";
+
+const asc = document.createElement("option");
+asc.value = "asc";
+asc.textContent = "Сначала ранние";
+const desc = document.createElement("option");
+desc.value = "desc";
+desc.textContent = "Сначала поздние";
+
+sortSelect.append(asc, desc);
+controls.append(sortSelect);
+
+
 main.append(controls);
