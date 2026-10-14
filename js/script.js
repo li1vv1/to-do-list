@@ -82,6 +82,19 @@ function renderTasks() {
     tasks.forEach(function (currentTask) {
         const item = document.createElement("li");
         item.className = "task";
+        if (currentTask.done) {
+            item.classList.add("task--done");
+        }
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "task__checkbox";
+        checkbox.checked = currentTask.done;
+
+        checkbox.addEventListener("change", function () {
+            currentTask.done = checkbox.checked;
+            renderTasks();
+        });
 
         const text = document.createElement("span");
         text.textContent = currentTask.title;
@@ -103,7 +116,7 @@ function renderTasks() {
             renderTasks();
         });
 
-        item.append(text, date, deleteButton);
+        item.append(checkbox, text, date, deleteButton);
         taskList.append(item);
     });
 }
