@@ -75,14 +75,35 @@ const taskList = document.createElement("ul");
 taskList.className = "task-list";
 main.append(taskList);
 
-const tasks = []; 
+let tasks = [];
 
 function renderTasks() {
     taskList.replaceChildren();
     tasks.forEach(function (currentTask) {
         const item = document.createElement("li");
         item.className = "task";
-        item.textContent = `${currentTask.title} — ${currentTask.date}`;
+
+        const text = document.createElement("span");
+        text.textContent = currentTask.title;
+        text.className = "task__text";
+
+        const date = document.createElement("span");
+        date.textContent = currentTask.date;
+        date.className = "task__date";
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Удалить";
+        deleteButton.type = "button";
+        deleteButton.className = "task__button";
+
+        deleteButton.addEventListener("click", function () {
+            tasks = tasks.filter(function (t) {
+                return t.id !== currentTask.id;
+            });
+            renderTasks();
+        });
+
+        item.append(text, date, deleteButton);
         taskList.append(item);
     });
 }

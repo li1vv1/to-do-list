@@ -7,6 +7,9 @@ body {
     background-color: lavender;
     color: black;
 }
+input, select, button {
+    font-family: inherit;
+}
 .app {
     max-width: 600px;
     margin: 0 auto;
@@ -31,7 +34,7 @@ body {
 }
 .task-form__date {
     padding: 10px 12px;
-    border: 1px solid #9595ca;
+    border: 1px solid #5a5a7a;
     border-radius: 8px;
     font-size: 16px;
 }
@@ -64,4 +67,41 @@ body {
     background-color: white;
     font-size: 16px;
     cursor: pointer;
+}
+.task-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.task {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding: 12px;
+    border: 1px solid #9595ca;
+    border-radius: 8px;
+    background-color: white;
+}
+.task__text {
+    flex: 1 1 150px;
+    font-size: 16px;
+    word-break: break-word;
+}
+.task__date {
+    font-size: 14px;
+    color: #555555;
+}
+.task__button {
+    padding: 6px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #5240db;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+.task-form__input::placeholder, .controls__search::placeholder {
+    color: #8a8aa8;
 }
