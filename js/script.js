@@ -32,3 +32,12 @@ form.append(addButton);
 const taskList = document.createElement("ul");
 taskList.className = "task-list";
 main.append(taskList);
+
+const controls = document.createElement("section");
+controls.className = "controls";
+const searchInput = document.createElement("input");
+searchInput.type = "search";
+searchInput.placeholder = "Поиск по названию";
+searchInput.className = "controls__search";
+controls.append(searchInput);
+main.append(controls);
