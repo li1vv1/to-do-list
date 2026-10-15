@@ -78,6 +78,15 @@ main.append(taskList);
 let tasks = [];
 let editingId = null;
 
+function sortTasks() {
+    tasks.sort(function (a, b) {
+        if (sortSelect.value === "asc") {
+            return a.date.localeCompare(b.date);
+        }
+        return b.date.localeCompare(a.date);
+    });
+}
+
 function renderTasks() {
     taskList.replaceChildren();
     tasks.forEach(function (currentTask) {
@@ -107,6 +116,7 @@ function renderTasks() {
                 currentTask.title = titleEdit.value;
                 currentTask.date = dateEdit.value;
                 editingId = null;
+                sortTasks();
                 renderTasks();
             });
 
@@ -173,6 +183,12 @@ form.addEventListener("submit", function (event) {
         done: false
     };
     tasks.push(task);
+    sortTasks();
     renderTasks();
     form.reset();
+});
+
+sortSelect.addEventListener("change", function () {
+    sortTasks();
+    renderTasks();
 });
