@@ -87,9 +87,21 @@ function sortTasks() {
     });
 }
 
+function getVisibleTasks() {
+    return tasks.filter(function (t) {
+        if (filterSelect.value === "active") {
+            return !t.done;
+        }
+        if (filterSelect.value === "done") {
+            return t.done;
+        }
+        return true;
+    });
+}
+
 function renderTasks() {
     taskList.replaceChildren();
-    tasks.forEach(function (currentTask) {
+    getVisibleTasks().forEach(function (currentTask) {
         const item = document.createElement("li");
         item.className = "task";
 
@@ -190,5 +202,9 @@ form.addEventListener("submit", function (event) {
 
 sortSelect.addEventListener("change", function () {
     sortTasks();
+    renderTasks();
+});
+
+filterSelect.addEventListener("change", function () {
     renderTasks();
 });
