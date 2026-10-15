@@ -88,14 +88,16 @@ function sortTasks() {
 }
 
 function getVisibleTasks() {
+    const query = searchInput.value.trim().toLowerCase();
+
     return tasks.filter(function (t) {
-        if (filterSelect.value === "active") {
-            return !t.done;
+        if (filterSelect.value === "active" && t.done) {
+            return false;
         }
-        if (filterSelect.value === "done") {
-            return t.done;
+        if (filterSelect.value === "done" && !t.done) {
+            return false;
         }
-        return true;
+        return t.title.toLowerCase().includes(query);
     });
 }
 
@@ -206,5 +208,9 @@ sortSelect.addEventListener("change", function () {
 });
 
 filterSelect.addEventListener("change", function () {
+    renderTasks();
+});
+
+searchInput.addEventListener("input", function () {
     renderTasks();
 });
