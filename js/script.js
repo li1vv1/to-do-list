@@ -75,7 +75,7 @@ const taskList = document.createElement("ul");
 taskList.className = "task-list";
 main.append(taskList);
 
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let editingId = null;
 
 function sortTasks() {
@@ -101,7 +101,12 @@ function getVisibleTasks() {
     });
 }
 
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
 function renderTasks() {
+    saveTasks();
     taskList.replaceChildren();
     getVisibleTasks().forEach(function (currentTask) {
         const item = document.createElement("li");
@@ -214,3 +219,6 @@ filterSelect.addEventListener("change", function () {
 searchInput.addEventListener("input", function () {
     renderTasks();
 });
+
+sortTasks();
+renderTasks();
