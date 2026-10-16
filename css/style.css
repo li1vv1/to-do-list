@@ -13,6 +13,8 @@ input, select, button {
     font-family: inherit;
 }
 .app {
+    position: relative;
+    z-index: 1;
     max-width: 600px;
     margin: 0 auto;
     padding: 16px;
@@ -145,15 +147,8 @@ input, select, button {
     border-radius: 10px;
     font-size: 22px;
 }
-.task {
-    cursor: grab;
-}
 .task--dragging {
     opacity: 0.5;
-}
-.app {
-    position: relative;
-    z-index: 1;
 }
 body::before, body::after {
     content: "";
