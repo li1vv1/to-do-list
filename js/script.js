@@ -1,3 +1,21 @@
+document.title = "To-Do List";
+
+const viewport = document.createElement("meta");
+viewport.name = "viewport";
+viewport.content = "width=device-width, initial-scale=1.0";
+document.head.append(viewport);
+
+const favicon = document.createElement("link");
+favicon.rel = "icon";
+favicon.type = "image/png";
+favicon.href = "images/favicon.png";
+document.head.append(favicon);
+
+const stylesheet = document.createElement("link");
+stylesheet.rel = "stylesheet";
+stylesheet.href = "css/style.css";
+document.head.append(stylesheet);
+
 const main = document.createElement("main");
 main.className = "app";
 document.body.append(main);
