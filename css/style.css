@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Marck+Script&display=swap');
 * {
     box-sizing: border-box;
 }
 body {
     margin: 0;
-    font-family: Georgia, serif;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
     background-color: lavender;
     color: black;
 }
@@ -18,33 +20,43 @@ input, select, button {
 .app__title {
     margin: 0 0 16px;
     text-align: center;
+    font-family: 'Marck Script', cursive;
+    font-size: 56px;
+    font-weight: normal;
 }
 .task-form {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 20px;
+    border: 2px solid #9595ca;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(82, 64, 219, 0.15);
 }
 .task-form__input {
-    flex: 1 1 200px;
-    padding: 10px 12px;
+    flex: 1 1 100%;
+    padding: 14px 16px;
     border: 1px solid #9595ca;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 10px;
+    font-size: 24px;
 }
 .task-form__date {
-    padding: 10px 12px;
-    border: 1px solid #5a5a7a;
-    border-radius: 8px;
-    font-size: 16px;
+    flex: 1 1 160px;
+    padding: 14px 16px;
+    border: 1px solid #9595ca;
+    border-radius: 10px;
+    font-size: 22px;
 }
 .task-form__button {
-    padding: 10px 20px;
+    flex: 1 1 160px;
+    padding: 14px 24px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #5240db;
     color: white;
-    font-size: 16px;
+    font-size: 24px;
     cursor: pointer;
 }
 .controls {
@@ -54,18 +66,19 @@ input, select, button {
     margin-bottom: 16px;
 }
 .controls__search {
-    flex: 1 1 200px;
-    padding: 10px 12px;
+    flex: 1 1 100%;
+    padding: 12px 16px;
     border: 1px solid #9595ca;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 10px;
+    font-size: 22px;
 }
 .controls__filter, .controls__sort {
-    padding: 10px 12px;
+    flex: 1 1 160px;
+    padding: 12px 16px;
     border: 1px solid #9595ca;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: white;
-    font-size: 16px;
+    font-size: 22px;
     cursor: pointer;
 }
 .task-list {
@@ -77,37 +90,38 @@ input, select, button {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    padding: 12px;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 16px;
     border: 1px solid #9595ca;
-    border-radius: 8px;
+    border-radius: 12px;
     background-color: white;
+    cursor: grab;
 }
 .task__text {
     flex: 1 1 150px;
-    font-size: 16px;
+    font-size: 26px;
     word-break: break-word;
 }
 .task__date {
-    font-size: 14px;
-    color: #555555;
+    font-size: 22px;
+    color: #5a5a7a;
 }
 .task__button {
-    padding: 6px 16px;
+    padding: 8px 18px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #5240db;
     color: white;
-    font-size: 14px;
+    font-size: 20px;
     cursor: pointer;
 }
 .task-form__input::placeholder, .controls__search::placeholder {
     color: #8a8aa8;
 }
 .task__checkbox {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
     accent-color: #5240db;
     cursor: pointer;
 }
@@ -120,14 +134,79 @@ input, select, button {
 }
 .task__edit-input {
     flex: 1 1 150px;
-    padding: 6px 10px;
+    padding: 10px 14px;
     border: 1px solid #9595ca;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 10px;
+    font-size: 24px;
 }
 .task__edit-date {
-    padding: 6px 10px;
+    padding: 10px 14px;
     border: 1px solid #9595ca;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 10px;
+    font-size: 22px;
+}
+.task {
+    cursor: grab;
+}
+.task--dragging {
+    opacity: 0.5;
+}
+.app {
+    position: relative;
+    z-index: 1;
+}
+body::before, body::after {
+    content: "";
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+}
+body::before {
+    top: 0;
+    right: 0;
+    background-image: url("../images/flower3.png");
+    background-position: top right;
+}
+body::after {
+    bottom: 0;
+    left: 0;
+    background-image: url("../images/flower2.png");
+    background-position: bottom left;
+}
+@media (max-width: 600px) {
+    body {
+        font-size: 18px;
+    }
+    .app {
+        padding: 12px;
+    }
+    .app__title {
+        font-size: 40px;
+    }
+    .task-form {
+        padding: 14px;
+    }
+    .task-form__input {
+        font-size: 20px;
+    }
+    .task-form__button {
+        font-size: 20px;
+    }
+    .task__text {
+        font-size: 22px;
+    }
+    .task__date {
+        font-size: 18px;
+    }
+    .task__button {
+        font-size: 18px;
+    }
+    body::before, body::after {
+        width: 220px;
+        height: 220px;
+    }
 }
