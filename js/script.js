@@ -77,6 +77,7 @@ main.append(taskList);
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let editingId = null;
+let draggedId = null;
 
 function sortTasks() {
     tasks.sort(function (a, b) {
@@ -188,6 +189,41 @@ function renderTasks() {
             renderTasks();
         });
 
+        item.draggable = true;
+
+        item.addEventListener("dragstart", function (event) {
+            draggedId = currentTask.id;
+            event.dataTransfer.setData("text/plain", currentTask.id);
+            event.dataTransfer.effectAllowed = "move";
+            item.classList.add("task--dragging");
+        });
+
+        item.addEventListener("dragend", function () {
+            draggedId = null;
+            item.classList.remove("task--dragging");
+        });
+
+        item.addEventListener("dragover", function (event) {
+            event.preventDefault();
+        });
+
+        item.addEventListener("drop", function (event) {
+            event.preventDefault();
+            if (draggedId === null || draggedId === currentTask.id) {
+                return;
+            }
+            const fromIndex = tasks.findIndex(function (t) {
+                return t.id === draggedId;
+            });
+            const toIndex = tasks.findIndex(function (t) {
+                return t.id === currentTask.id;
+            });
+            const moved = tasks.splice(fromIndex, 1)[0];
+            tasks.splice(toIndex, 0, moved);
+            draggedId = null;
+            renderTasks();
+        });
+
         item.append(checkbox, text, date, editButton, deleteButton);
         taskList.append(item);
     });
@@ -220,5 +256,4 @@ searchInput.addEventListener("input", function () {
     renderTasks();
 });
 
-sortTasks();
 renderTasks();
